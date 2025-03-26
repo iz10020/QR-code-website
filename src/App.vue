@@ -1,16 +1,13 @@
 <template>
-  <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-  <HomePage/>
+    <!-- Router View for different pages -->
+    <router-view></router-view>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
-import HomePage from './components/HomePage.vue';
 
 export default {
   name: 'App',
   components: {
-    HomePage
   }
 }
 </script>
@@ -23,5 +20,20 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+nav {
+  margin: 20px 0;
+}
+
+nav a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #42b983;
+  font-weight: bold;
+}
+
+nav a:hover {
+  text-decoration: underline;
 }
 </style>
