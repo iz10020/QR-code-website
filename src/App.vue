@@ -1,18 +1,13 @@
 <template>
-
     <!-- Router View for different pages -->
     <router-view></router-view>
-
 </template>
 
 <script>
-// Importing HelloWorld component
-// import HelloWorld from './components/HelloWorld.vue';
 
 export default {
   name: 'App',
   components: {
-    // HelloWorld
   }
 }
 </script>
