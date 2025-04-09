@@ -1,15 +1,17 @@
 <template>
-    <!-- Router View for different pages -->
-    <router-view></router-view>
+  <!-- Router View for different pages -->
+  <router-view></router-view>
 </template>
 
 <script>
 
+
 export default {
   name: 'App',
   components: {
-  }
-}
+    
+  },
+};
 </script>
 
 <style>
