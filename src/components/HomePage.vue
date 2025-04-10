@@ -1,5 +1,6 @@
 <template>
-  <div class="container">
+  <div>
+    <!-- Logo en navigatiebalk -->
     <header>
       <img src="@/assets/logo.png" alt="Logo" class="logo" @click="goToHome" />
     </header>
@@ -10,40 +11,53 @@
       <router-link to="/info" class="nav-button">Info</router-link>
     </nav>
 
-    <h1>Welkom bij de QR Code Generator</h1>
+    <!-- QR Code Generator -->
+    <div class="container">
+      <h1>Welkom bij de QR Code Generator</h1>
 
-    <div class="input-wrapper">
-      <input v-model="plaatsnaam" placeholder="Plaatsnaam" />
-      <input v-model="straatnaam" placeholder="Straatnaam" />
-      <button @click="gaNaarStraat">Zoek</button>
+      <div class="input-wrapper">
+        <input v-model="plaatsnaam" placeholder="Plaatsnaam" />
+        <input v-model="straatnaam" placeholder="Straatnaam" />
+        <button @click="gaNaarStraat">Zoek</button>
+      </div>
+    </div>
+
+    <!-- OpenMap Kaartcomponent -->
+    <div>
+      <h1>Welkom op de Kaartpagina</h1>
+      <OpenMap />
     </div>
   </div>
 </template>
 
-<script setup>
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-
-const plaatsnaam = ref('')
-const straatnaam = ref('')
-const router = useRouter()
-
-const gaNaarStraat = () => {
-  if (plaatsnaam.value && straatnaam.value) {
-    const p = plaatsnaam.value.trim().toLowerCase().replaceAll(' ', '-')
-    const s = straatnaam.value.trim().toLowerCase().replaceAll(' ', '-')
-    router.push(`/${p}/${s}`)
-  }
-}
-</script>
-
 <script>
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import OpenMap from '@/components/Openmap.vue'; // Importeer de kaartcomponent
+
 export default {
-  name: "QRCodeGenerator",
-  methods: {
-    goToHome() {
-      this.$router.push("/");
-    },
+  name: 'HomePage',
+  components: {
+    OpenMap, // Voeg OpenMap toe als een component
+  },
+  setup() {
+    const plaatsnaam = ref('');
+    const straatnaam = ref('');
+    const router = useRouter();
+
+    const gaNaarStraat = () => {
+      if (plaatsnaam.value && straatnaam.value) {
+        const p = plaatsnaam.value.trim().toLowerCase().replaceAll(' ', '-');
+        const s = straatnaam.value.trim().toLowerCase().replaceAll(' ', '-');
+        router.push(`/${p}/${s}`);
+      }
+    };
+
+    const goToHome = () => {
+      router.push('/');
+    };
+
+    return { plaatsnaam, straatnaam, gaNaarStraat, goToHome };
   },
 };
 </script>
