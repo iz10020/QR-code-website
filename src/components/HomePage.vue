@@ -1,17 +1,7 @@
 <template>
-  <div>
+  <div class="container">
     <!-- Logo en navigatiebalk -->
-    <header>
-      <div class="header-content">
-        <img src="@/assets/logo.png" alt="Logo" class="logo" @click="goToHome" />
-        <nav class="nav-bar">
-          <router-link to="/" class="nav-button">Home</router-link>
-          <router-link to="/qr-generator" class="nav-button">QR-Generator</router-link>
-          <router-link to="/info" class="nav-button">Info</router-link>
-        </nav>
-      </div>
-      <hr class="separator" />
-    </header>
+    
 
     <main>
       <!-- 👋 Welkomsttekst -->
@@ -43,12 +33,12 @@
 <script>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import OpenMap from '@/components/Openmap.vue'; // Importeer de kaartcomponent
+// import OpenMap from '@/components/Openmap.vue'; // Importeer de kaartcomponent
 
 export default {
   name: 'HomePage',
   components: {
-    OpenMap, // Voeg OpenMap toe als een component
+    // OpenMap, // Voeg OpenMap toe als een component
   },
   setup() {
     const plaatsnaam = ref('');
@@ -88,55 +78,6 @@ body {
   padding-top: 120px;
 }
 
-header {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  padding: 20px;
-  box-sizing: border-box;
-}
-
-.header-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.separator {
-  width: 100%;
-  height: 2px;
-  background-color: #ccc;
-  margin-top: 10px;
-  border: none;
-}
-
-.logo {
-  height: 80px;
-  cursor: pointer;
-}
-
-.nav-bar {
-  display: flex;
-  gap: 20px;
-}
-
-.nav-button {
-  text-decoration: none;
-  color: #333;
-  font-size: 18px;
-  padding: 10px 20px;
-  border: 2px solid #333;
-  border-radius: 5px;
-  transition: all 0.3s ease;
-}
-
-.nav-button:hover {
-  background-color: #333;
-  color: #fff;
-}
 
 main {
   text-align: center;
