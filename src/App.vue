@@ -6,11 +6,16 @@
 </template>
 
 <script>
+//  Hier importeer je de Leaflet CSS
+import 'leaflet/dist/leaflet.css';
+
 export default {
   name: 'App',
   components: {
-  }
-}
+    // Voeg hier componenten toe als je ze gebruikt
+  },
+};
+
 </script>
 
 <style scoped>
