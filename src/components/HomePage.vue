@@ -47,9 +47,9 @@ export default {
 
     const gaNaarStraat = () => {
       if (plaatsnaam.value && straatnaam.value) {
-        const p = plaatsnaam.value.trim().toLowerCase().replaceAll(' ', '-');
-        const s = straatnaam.value.trim().toLowerCase().replaceAll(' ', '-');
-        router.push(`/${p}/${s}`);
+        // const p = plaatsnaam.value.trim().toLowerCase().replaceAll(' ', '-');
+        // const s = straatnaam.value.trim().toLowerCase().replaceAll(' ', '-');
+        router.push(`/${plaatsnaam.value}/${straatnaam.value}`);
       }
     };
 

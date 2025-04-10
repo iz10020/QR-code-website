@@ -43,6 +43,7 @@ export default {
   margin: auto;
   padding: 20px;
   text-align: center;
+  padding-top: 120px;
 }
 ul {
   text-align: left;
