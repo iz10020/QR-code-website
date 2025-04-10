@@ -2,31 +2,41 @@
   <div>
     <!-- Logo en navigatiebalk -->
     <header>
-      <img src="@/assets/logo.png" alt="Logo" class="logo" @click="goToHome" />
+      <div class="header-content">
+        <img src="@/assets/logo.png" alt="Logo" class="logo" @click="goToHome" />
+        <nav class="nav-bar">
+          <router-link to="/" class="nav-button">Home</router-link>
+          <router-link to="/qr-generator" class="nav-button">QR-Generator</router-link>
+          <router-link to="/info" class="nav-button">Info</router-link>
+        </nav>
+      </div>
+      <hr class="separator" />
     </header>
 
-    <nav>
-      <router-link to="/" class="nav-button">Home</router-link>
-      <router-link to="/qr-generator" class="nav-button">QR-Generator</router-link>
-      <router-link to="/info" class="nav-button">Info</router-link>
-    </nav>
+    <main>
+      <!-- 👋 Welkomsttekst -->
+      <h1>Welkom bij Streetwise.</h1>
+      <p class="subtitle">Een eenvoudig QR-Code generator voor alle locaties van Nederland.</p>
 
-    <!-- QR Code Generator -->
-    <div class="container">
-      <h1>Welkom bij de QR Code Generator</h1>
-
+      <!-- 🔍 Zoekgedeelte -->
+      <h2 class="zoek-title">Zoek plaats op</h2>
       <div class="input-wrapper">
         <input v-model="plaatsnaam" placeholder="Plaatsnaam" />
         <input v-model="straatnaam" placeholder="Straatnaam" />
         <button @click="gaNaarStraat">Zoek</button>
       </div>
-    </div>
 
-    <!-- OpenMap Kaartcomponent -->
-    <div>
-      <h1>Welkom op de Kaartpagina</h1>
-      <OpenMap />
-    </div>
+      <!-- ℹ️ Info Sectie -->
+      <div class="info-section">
+        <h2 class="info-title">Waarom onze website?</h2>
+        <div class="info-content">
+          <p class="info-text">
+            Onze website is gemaakt voor Nederlandse steden en wijken. Met onze tool maak je makkelijk QR-codes die linken naar informatie over steden en buurten. Handig voor toeristen, nieuwkomers en bewoners die hun omgeving beter willen leren kennen.
+          </p>
+          <img src="@/assets/qrcodehome.gif" alt="QR Code" class="qr-code" />
+        </div>
+      </div>
+    </main>
   </div>
 </template>
 
@@ -64,32 +74,51 @@ export default {
 
 <style scoped>
 body {
-  font-family: 'Montserrat', sans-serif;
   margin: 0;
   padding: 0;
+  font-family: 'Montserrat', sans-serif;
+  background-color: #f4f4f4;
+  text-align: center;
+}
+
+.container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  height: 100vh;
-  background-color: #f4f4f4;
+  padding-top: 120px;
 }
 
 header {
   position: absolute;
-  top: 20px;
-  left: 20px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.separator {
+  width: 100%;
+  height: 2px;
+  background-color: #ccc;
+  margin-top: 10px;
+  border: none;
 }
 
 .logo {
-  height: 50px;
+  height: 80px;
   cursor: pointer;
 }
 
-nav {
-  position: absolute;
-  top: 20px;
-  right: 20px;
+.nav-bar {
   display: flex;
   gap: 20px;
 }
@@ -109,16 +138,34 @@ nav {
   color: #fff;
 }
 
+main {
+  text-align: center;
+  max-width: 800px;
+  margin-top: 20px;
+}
+
 h1 {
   font-size: 36px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 18px;
+  color: #666;
+}
+
+.zoek-title {
+  font-size: 24px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  color: #333;
 }
 
 .input-wrapper {
   display: flex;
   gap: 10px;
   justify-content: center;
-  margin-top: 20px;
+  margin-bottom: 40px;
 }
 
 input {
@@ -141,5 +188,37 @@ button {
 
 button:hover {
   background-color: #555;
+}
+
+.info-section {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.info-title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.info-content {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.info-text {
+  max-width: 300px;
+  font-size: 14px;
+  color: #333;
+  text-align: left;
+}
+
+.qr-code {
+  width: 180px;
+  height: 180px;
 }
 </style>
