@@ -43,12 +43,12 @@
 <script>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import OpenMap from '@/components/Openmap.vue'; // Importeer de kaartcomponent
+// import OpenMap from '@/components/Openmap.vue'; // Importeer de kaartcomponent
 
 export default {
   name: 'HomePage',
   components: {
-    OpenMap, // Voeg OpenMap toe als een component
+    // OpenMap, // Voeg OpenMap toe als een component
   },
   setup() {
     const plaatsnaam = ref('');
