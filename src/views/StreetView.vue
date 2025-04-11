@@ -9,7 +9,7 @@
         <!-- QR Code Generator -->
         <div class="qr-code-generator">
 
-          <button class="qr-button" @click="generateQRCode">📱 Genereer QR-code</button>
+          <button class="qr-button" @click="generateQRCode">Genereer QR-code</button>
           <div v-if="qrCodeUrl" class="qr-code">
             <img :src="qrCodeUrl" alt="QR Code" />
             <p>Scan deze code om deze pagina te openen</p>
@@ -132,7 +132,7 @@ function initMap(coords) {
   max-width: 250px;
   padding: 10px;
   text-align: center;
-  background-color: #f6f6f6;
+  background-color: #f6f6f600;
   border-radius: 12px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
