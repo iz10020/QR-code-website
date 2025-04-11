@@ -4,45 +4,83 @@
       <div class="header-content">
         <img src="@/assets/logo.png" alt="Logo" class="logo" @click="goToHome" />
         <nav class="nav-bar">
+          <!-- Als gebruiker is ingelogd, toon de email naast de knoppen -->
+          <div v-if="user" class="user-info">
+            <span class="user-email">{{ user.email }}</span>
+          </div>
+          
+          <!-- Navigatieknoppen -->
           <router-link to="/" class="nav-button">Home</router-link>
-          <router-link to="/qr-generator" class="nav-button">QR-Generator</router-link>
           <router-link to="/info" class="nav-button">Info</router-link>
+
+          <!-- Als gebruiker is ingelogd, toon de "Log uit" knop met dezelfde stijl als de "Log in" knop -->
+          <router-link v-if="user" to="#" @click.prevent="handleLogout" class="nav-button">Log uit</router-link>
+
+          <!-- Als gebruiker niet ingelogd is, toon de "Log in" knop -->
+          <router-link v-else to="/login" class="nav-button">Log in</router-link>
         </nav>
       </div>
       <hr class="separator" />
     </header>
+
     <!-- Router View for different pages -->
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-//  Hier importeer je de Leaflet CSS
-import 'leaflet/dist/leaflet.css';
+import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 
 export default {
   name: 'App',
-  components: {
-    // Voeg hier componenten toe als je ze gebruikt
+  data() {
+    return {
+      user: null,  // Hier slaan we de ingelogde gebruiker op
+    };
+  },
+  methods: {
+    goToHome() {
+      this.$router.push('/');
+    },
+    handleLogout() {
+      const auth = getAuth();
+      signOut(auth)
+        .then(() => {
+          this.user = null;  // Reset de gebruikersinformatie na uitloggen
+          this.$router.push('/login');  // Redirect naar de loginpagina
+        })
+        .catch((error) => {
+          console.error("Error logging out: ", error);
+        });
+    },
+  },
+  created() {
+    const auth = getAuth();
+    // Luister naar veranderingen in de gebruikersstatus
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // Als er een ingelogde gebruiker is, sla die op in de data
+        this.user = user;
+      } else {
+        // Als de gebruiker uitgelogd is, stel de gebruiker in op null
+        this.user = null;
+      }
+    });
   },
 };
-
 </script>
 
 <style scoped>
 #app {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #000000;
-
-  /* Achtergrondafbeelding */
   background-image: url(~@/assets/background.jpg); /* Zorg dat dit pad klopt */
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-
   width: 100%;
   min-height: 100vh;
 }
@@ -79,6 +117,7 @@ header {
 
 .nav-bar {
   display: flex;
+  align-items: center; /* Zorg ervoor dat de items goed uitgelijnd zijn */
   gap: 20px;
 }
 
@@ -97,27 +136,15 @@ header {
   color: #fff;
 }
 
-/* Navigation styling */
-nav {
-  margin: 20px 0;
+.user-info {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
 }
 
-nav a {
-  margin: 0 10px;
-  text-decoration: none;
-  color: #42b983;
-  font-weight: bold;
-}
-
-nav a:hover {
-  text-decoration: underline;
-}
-</style>
-
-<!-- Deze style is niet scoped en reset globale marges van html en body -->
-<style>
-html, body {
-  margin: 0;
-  padding: 0;
+.user-email {
+  font-size: 16px;
+  color: #333;
+  margin-right: 20px;
 }
 </style>
